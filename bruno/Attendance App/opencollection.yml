@@ -1,0 +1,15 @@
+opencollection: 1.0.0
+
+info:
+  name: Attendance App
+
+request:
+  variables:
+    - name: baseUrl
+      value: http://localhost:5000/api
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

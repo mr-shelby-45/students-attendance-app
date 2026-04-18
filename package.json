@@ -1,0 +1,41 @@
+{
+  "name": "attendance-app",
+  "version": "1.0.0",
+  "description": "- **Runtime**: Node.js - **Framework**: Express.js - **Database**: PostgreSQL via Prisma ORM - **Auth**: JWT + bcrypt - **Email**: Nodemailer (Gmail SMTP)",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "db:migrate": "npx prisma migrate dev",
+    "db:push": "npx prisma db push",
+    "db:seed": "npx prisma db seed",
+    "db:generate": "npx prisma generate"
+  },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@prisma/client": "^6.19.3",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.3.2",
+    "express-validator": "^7.3.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "morgan": "^1.10.1",
+    "nodemailer": "^8.0.5",
+    "prisma": "^6.19.3"
+  },
+  "devDependencies": {
+    "@prisma/config": "^7.7.0",
+    "@types/node": "^25.6.0",
+    "nodemon": "^3.1.14"
+  }
+}

@@ -1,0 +1,26 @@
+info:
+  name: register
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: http://localhost:5000/api/auth/register
+  body:
+    type: json
+    data: |-
+      {
+        "email": "john@uni.ac.ke",
+        "password": "password123",
+        "firstName": "John",
+        "lastName": "Doe",
+        "regNumber": "CS/001/2024",
+        "collegeId": "cmo38iefz00038vj0c3nhawiw"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

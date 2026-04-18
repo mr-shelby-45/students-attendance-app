@@ -1,0 +1,81 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model College {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique
+  students  Student[]
+  units     Unit[]
+  createdAt DateTime @default(now())
+}
+
+model Unit {
+  id          String       @id @default(cuid())
+  code        String       @unique
+  name        String
+  college     College      @relation(fields: [collegeId], references: [id])
+  collegeId   String
+  lecturer    Lecturer?    @relation(fields: [lecturerId], references: [id])
+  lecturerId  String?
+  attendances Attendance[]
+  createdAt   DateTime     @default(now())
+}
+
+model Student {
+  id              String       @id @default(cuid())
+  email           String       @unique
+  password        String
+  firstName       String
+  lastName        String
+  regNumber       String       @unique
+  college         College      @relation(fields: [collegeId], references: [id])
+  collegeId       String
+  deviceId        String?
+  deviceFingerprint String?
+  isDeviceLocked  Boolean      @default(false)
+  attendances     Attendance[]
+  resetToken      String?
+  resetTokenExpiry DateTime?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+}
+
+model Lecturer {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  firstName String
+  lastName  String
+  units     Unit[]
+  resetToken      String?
+  resetTokenExpiry DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Attendance {
+  id         String   @id @default(cuid())
+  student    Student  @relation(fields: [studentId], references: [id])
+  studentId  String
+  unit       Unit     @relation(fields: [unitId], references: [id])
+  unitId     String
+  latitude   Float
+  longitude  Float
+  deviceId   String
+  status     AttendanceStatus @default(PRESENT)
+  checkedInAt DateTime @default(now())
+
+  @@unique([studentId, unitId, checkedInAt])
+}
+
+enum AttendanceStatus {
+  PRESENT
+  FLAGGED
+}
