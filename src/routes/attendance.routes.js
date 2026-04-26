@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { checkIn, getMyAttendance } = require("../controllers/attendance.controller");
+const { checkIn, getMyAttendance, getWeeklySummary} = require("../controllers/attendance.controller");
 const { verifyToken } = require("../middleware/auth");
 const { checkGeofence } = require("../middleware/geofence");
 const { checkDevice } = require("../middleware/deviceCheck");

@@ -26,6 +26,7 @@ model Unit {
   lecturerId  String?
   attendances Attendance[]
   createdAt   DateTime     @default(now())
+  weeklyAttendances WeeklyAttendance[]
 }
 
 model Student {
@@ -45,6 +46,7 @@ model Student {
   resetTokenExpiry DateTime?
   createdAt       DateTime     @default(now())
   updatedAt       DateTime     @updatedAt
+  weeklyAttendances WeeklyAttendance[]
 }
 
 model Lecturer {
@@ -78,4 +80,25 @@ model Attendance {
 enum AttendanceStatus {
   PRESENT
   FLAGGED
+}
+
+model WeeklyAttendance {
+  id          String               @id @default(cuid())
+  student     Student              @relation(fields: [studentId], references: [id])
+  studentId   String
+  unit        Unit                 @relation(fields: [unitId], references: [id])
+  unitId      String
+  weekNumber  Int
+  year        Int
+  status      WeeklyAttendanceStatus @default(PENDING)
+  checkedInAt DateTime?
+  createdAt   DateTime             @default(now())
+
+  @@unique([studentId, unitId, weekNumber, year])
+}
+
+enum WeeklyAttendanceStatus {
+  PRESENT
+  MISSED
+  PENDING
 }

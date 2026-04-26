@@ -10,6 +10,7 @@ const attendanceRoutes = require("./routes/attendance.routes");
 const collegeRoutes = require("./routes/college.routes");
 const reportRoutes = require("./routes/report.routes");
 const errorHandler = require("./middleware/errorHandler");
+const { scheduleWeeklyReset } = require("./utils/weeklyReset");
 
 const app = express();
 
@@ -61,6 +62,7 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`\n🚀 Server running on port ${PORT}`);
   console.log(`📡 Health check: http://localhost:${PORT}/api/health\n`);
+  scheduleWeeklyReset();
 });
 
 module.exports = app;
