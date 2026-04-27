@@ -13,5 +13,7 @@ router.post("/check-in", checkGeofence, checkDevice, checkIn);
 
 // Get student's own attendance (optionally filtered by unit code)
 router.get("/my", getMyAttendance);
+//Get student's weekly attendance only
+router.get("/weekly", getWeeklySummary);
 
 module.exports = router;

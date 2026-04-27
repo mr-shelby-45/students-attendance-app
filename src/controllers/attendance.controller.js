@@ -41,7 +41,7 @@ const checkIn = async (req, res, next) => {
       include: { unit: { select: { code: true, name: true } } },
     });
     // Record in weekly attendance
-          
+    const { getSemesterWeek, getCurrentYear } = require("../utils/weeklyReset");      
     await prisma.weeklyAttendance.upsert({
       where: {
         studentId_unitId_weekNumber_year: {
