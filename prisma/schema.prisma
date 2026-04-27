@@ -80,6 +80,7 @@ model Attendance {
 enum AttendanceStatus {
   PRESENT
   FLAGGED
+  FLAGGED_GPS
 }
 
 model WeeklyAttendance {
